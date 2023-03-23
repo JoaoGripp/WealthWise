@@ -8,17 +8,23 @@
 
 /* Begin PBXBuildFile section */
 		F851855E29CBFC8C00D0CADE /* WealthWiseApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F851855D29CBFC8C00D0CADE /* WealthWiseApp.swift */; };
-		F851856029CBFC8C00D0CADE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F851855F29CBFC8C00D0CADE /* ContentView.swift */; };
+		F851856029CBFC8C00D0CADE /* WealthWiseTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F851855F29CBFC8C00D0CADE /* WealthWiseTabView.swift */; };
 		F851856229CBFC8E00D0CADE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F851856129CBFC8E00D0CADE /* Assets.xcassets */; };
 		F851856529CBFC8E00D0CADE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F851856429CBFC8E00D0CADE /* Preview Assets.xcassets */; };
+		F851856C29CBFD5F00D0CADE /* MyStockListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F851856B29CBFD5F00D0CADE /* MyStockListView.swift */; };
+		F851856E29CBFD8400D0CADE /* WatchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F851856D29CBFD8400D0CADE /* WatchListView.swift */; };
+		F851857029CBFE1B00D0CADE /* Color+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F851856F29CBFE1B00D0CADE /* Color+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		F851855A29CBFC8C00D0CADE /* WealthWise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WealthWise.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F851855D29CBFC8C00D0CADE /* WealthWiseApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WealthWiseApp.swift; sourceTree = "<group>"; };
-		F851855F29CBFC8C00D0CADE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F851855F29CBFC8C00D0CADE /* WealthWiseTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WealthWiseTabView.swift; sourceTree = "<group>"; };
 		F851856129CBFC8E00D0CADE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F851856429CBFC8E00D0CADE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		F851856B29CBFD5F00D0CADE /* MyStockListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStockListView.swift; sourceTree = "<group>"; };
+		F851856D29CBFD8400D0CADE /* WatchListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchListView.swift; sourceTree = "<group>"; };
+		F851856F29CBFE1B00D0CADE /* Color+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,9 +58,12 @@
 			isa = PBXGroup;
 			children = (
 				F851855D29CBFC8C00D0CADE /* WealthWiseApp.swift */,
-				F851855F29CBFC8C00D0CADE /* ContentView.swift */,
+				F851855F29CBFC8C00D0CADE /* WealthWiseTabView.swift */,
 				F851856129CBFC8E00D0CADE /* Assets.xcassets */,
 				F851856329CBFC8E00D0CADE /* Preview Content */,
+				F851856B29CBFD5F00D0CADE /* MyStockListView.swift */,
+				F851856D29CBFD8400D0CADE /* WatchListView.swift */,
+				F851856F29CBFE1B00D0CADE /* Color+Ext.swift */,
 			);
 			path = WealthWise;
 			sourceTree = "<group>";
@@ -137,8 +146,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F851856029CBFC8C00D0CADE /* ContentView.swift in Sources */,
+				F851856029CBFC8C00D0CADE /* WealthWiseTabView.swift in Sources */,
+				F851856E29CBFD8400D0CADE /* WatchListView.swift in Sources */,
+				F851856C29CBFD5F00D0CADE /* MyStockListView.swift in Sources */,
 				F851855E29CBFC8C00D0CADE /* WealthWiseApp.swift in Sources */,
+				F851857029CBFE1B00D0CADE /* Color+Ext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

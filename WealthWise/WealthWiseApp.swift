@@ -11,7 +11,7 @@ import SwiftUI
 struct WealthWiseApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            WealthWiseTabView()
         }
     }
 }
