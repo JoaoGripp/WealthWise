@@ -19,15 +19,12 @@ struct TestView: View {
         NavigationView {
             List {
                 ForEach(stockList.stocks) { stock in
-                    NavigationLink(destination: EditView(stock: $stockList.stocks[stockList.stocks.firstIndex(of: stock)!])) {
-                        HStack {
-                            
-                            Image(systemName: "checkmark.circle.fill")
-                            Text(stock.symbol)
-                        }
+                    NavigationLink(destination: PercentageSliderView(stock: $stockList.stocks[stockList.stocks.firstIndex(of: stock)!])) {
+                        StockInfoCell(stock: stock)
                     }
                 }
             }
+            .listStyle(PlainListStyle())
             .navigationBarTitle(Text("Watchlist"))
             .navigationBarItems(trailing: addButton)
         }
@@ -35,7 +32,7 @@ struct TestView: View {
     
     var addButton: some View {
         Button(action: {
-            stockList.stocks.append(Stock(symbol: "Test", description: "dsdsd", price: 2.0, quantity: 3.0, porcentage: 4.0))
+            stockList.stocks.append(Stock(symbol: "AAPL34", description: "Apple Company", price: 2.0, quantity: 3.0, percentage: 4.0))
         }) {
             Image(systemName: "plus")
         }
@@ -47,8 +44,8 @@ struct EditView: View {
     
     var body: some View {
         Form {
-            Section(header: Text("Task")) {
-                TextField("Enter task", text: $stock.symbol)
+            Section(header: Text(stock.symbol)) {
+                TextField("Enter task", text: $stock.description)
             }
             Section(header: Text("Status")) {
                 TextField("Enter task", text: $stock.description)
@@ -66,5 +63,24 @@ struct TestView_Previews: PreviewProvider {
     static var previews: some View {
         TestView()
             .environmentObject(stockList)
+    }
+}
+
+struct StockInfoCell: View {
+    let stock: Stock
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(stock.symbol)
+                .font(.subheadline)
+                .foregroundColor(.gray)
+            Text("\(String(format: "%.2f", stock.percentage))%")
+                .font(.title2)
+                .foregroundColor(stock.price > 0 ? .green : .red)
+        }
+        .padding()
+        .background(Color.white)
+        .cornerRadius(10)
+        .shadow(radius: 5)
     }
 }
