@@ -9,6 +9,14 @@ import SwiftUI
 
 final class StockList: ObservableObject {
     @Published var stocks = [Stock]()
+    
+    var totalValue: Double {
+        return stocks.reduce(0) { $0 + $1.price * $1.quantity }
+    }
+    
+    var savingAccountPercentage: Double {
+        return 100 - stocks.reduce(0) { $0 + $1.percentage }
+    }
 }
 
 struct TestView: View {
@@ -17,14 +25,33 @@ struct TestView: View {
     
     var body: some View {
         NavigationView {
-            List {
-                ForEach(stockList.stocks) { stock in
-                    NavigationLink(destination: PercentageSliderView(stock: $stockList.stocks[stockList.stocks.firstIndex(of: stock)!])) {
-                        StockInfoCell(stock: stock)
+            VStack {
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text("Total Portifolio")
+                            .font(.footnote)
+                        Text("$\(stockList.totalValue, specifier: "%.2f")")
+                            .bold()
+                            .font(.title)
+                            .foregroundColor(.primary)
+                        
+                    }
+                    .padding()
+                    Spacer()
+                }
+                
+                
+                Text("\(stockList.savingAccountPercentage, specifier: "%.2f")")
+                
+                List {
+                    ForEach(stockList.stocks) { stock in
+                        NavigationLink(destination: PercentageSliderView(stock: $stockList.stocks[stockList.stocks.firstIndex(of: stock)!], percentageMissing: stockList.savingAccountPercentage)) {
+                            StockInfoCell(stock: stock, total: stockList.totalValue)
+                        }
                     }
                 }
+                .listStyle(PlainListStyle())
             }
-            .listStyle(PlainListStyle())
             .navigationBarTitle(Text("Watchlist"))
             .navigationBarItems(trailing: addButton)
         }
@@ -32,7 +59,7 @@ struct TestView: View {
     
     var addButton: some View {
         Button(action: {
-            stockList.stocks.append(Stock(symbol: "AAPL34", description: "Apple Company", price: 2.0, quantity: 3.0, percentage: 4.0))
+            stockList.stocks.append(Stock(symbol: "AAPL34", description: "Apple Company", price: 20.0, quantity: 3.0, percentage: 0.0))
         }) {
             Image(systemName: "plus")
         }
@@ -68,16 +95,52 @@ struct TestView_Previews: PreviewProvider {
 
 struct StockInfoCell: View {
     let stock: Stock
+    let total: Double
+    
+    var percentageActual: Double {
+        return 100 * (stock.price * stock.quantity) / (total)
+    }
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text(stock.symbol)
-                .font(.subheadline)
-                .foregroundColor(.gray)
-            Text("\(String(format: "%.2f", stock.percentage))%")
-                .font(.title2)
-                .foregroundColor(stock.price > 0 ? .green : .red)
+        VStack {
+            HStack {
+                Image("AAPL_image")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 30, height: 30)
+                
+                VStack(alignment: .leading, spacing: 8) {
+                    Text(stock.symbol)
+                        .font(.title2)
+                        .foregroundColor(.accentColor)
+                    
+                    Text(stock.description)
+                        .font(.callout)
+                        .foregroundColor(.secondary)
+                        .lineLimit(0)
+                }
+                Spacer()
+                
+                VStack {
+                    Text("$\(String(format: "%.2f", stock.price))")
+                        .font(.title2)
+                        .foregroundColor(.primary)
+                }
+            }
+            
+            HStack {
+                Text("\(String(format: "%.2f", percentageActual))%")
+                    .font(.title3)
+                    .foregroundColor( percentageActual > stock.percentage ? .green : .red)
+                
+                Spacer()
+                
+                Text("\(String(format: "%.2f", stock.percentage))%")
+                    .font(.title3)
+                    .foregroundColor(.green)
+            }
         }
+        
         .padding()
         .background(Color.white)
         .cornerRadius(10)

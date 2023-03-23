@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PercentageSliderView: View {
     @Binding var stock: Stock
+    var percentageMissing: Double
     
     var body: some View {
         VStack {
@@ -18,13 +19,23 @@ struct PercentageSliderView: View {
             Text("Adjust Percentage")
                 .font(.title3)
             
-            Text("\(String(format: "%.1f", stock.percentage))%")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-                .foregroundColor(.green)
-                .padding(10)
             
-            Slider(value: $stock.percentage, in: 0...100, step: 0.1)
+            HStack(spacing: 30) {
+                Text("\(String(format: "%.1f", stock.percentage))%")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .foregroundColor(.green)
+                    .padding(10)
+                
+                Text("\(String(format: "%.1f", percentageMissing))%")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .foregroundColor(.gray)
+                    .padding(10)
+            }
+            
+            
+            Slider(value: $stock.percentage, in: 0...(stock.percentage + percentageMissing) + 0.01, step: 0.1)
                 .padding(.horizontal)
             
             HStack {
@@ -48,7 +59,7 @@ struct PercentageSliderView_Previews: PreviewProvider {
     @State static var stock = MockData.sampleStock01
     
     static var previews: some View {
-        PercentageSliderView(stock: $stock)
+        PercentageSliderView(stock: $stock, percentageMissing: 10.0)
     }
 }
 
