@@ -12,9 +12,8 @@ struct WatchListView: View {
     @State private var value = 0
     
     var body: some View {
-        List {
-            WatchListCell(title: "AAPL34", description: "Apple Company", value: $value)
-            WatchListCell(title: "ITSA4", description: "Itausa SA", value: $value)
+        List(MockData.sampleStocks) { stock in
+            WatchListCell(title: stock.symbol, description: stock.description, value: $value)
         }
         
     }
@@ -34,15 +33,17 @@ struct WatchListCell: View {
     
     var body: some View {
         HStack {
-            VStack(spacing: 10) {
+            VStack(alignment: .leading, spacing: 10) {
                 Text(title)
                     .font(.title3)
                     .fontWeight(.bold)
                 Text(description)
                     .font(.body)
                     .foregroundStyle(.secondary)
+                    .lineLimit(0)
             }
-            
+            .frame(width: 120)
+            Spacer()
             VStack(alignment: .trailing) {
                 Text("\(value)%")
                     .font(.title3)
